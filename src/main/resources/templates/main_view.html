@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Users</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row bg-dark justify-content-end">
+            <button class="btn btn-warning">
+                <a th:href="@{'/'}">Đăng xuất</a>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-2 bg-dark text-white p-2">
+                <img src="/email.png" alt="Logo" class="mt-3 mb-3" style="max-width: 150px;">
+                <div class="d-flex flex-column">
+                    <a href="#">Soạn thư</a>
+                    <a href="#">Hộp thư đến</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=1'}">Học tập</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=2'}">Đơn hàng</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=3'}">Quảng cáo</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=4'}">Cảnh báo</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=5'}">Ngân hàng</a>
+                    <a th:href="@{'/nguoi-dung/mail-theo-nhan?idNguoiDung=' + ${id} + '&idNhan=6'}">Thư rác</a>
+                </div>
+            </div>
+
+            <!-- Khu vực email (5/6 màn hình) -->
+            <div class="col-10 p-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Gửi từ</th>
+                            <th style="width: 60%;">Nội dung</th>
+                            <th style="width: 15%">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="email:${danhSachMail}">
+                        <tr>
+                            <td>[[${email.nguoiGui}]]</td>
+                            <td>[[${email.tieuDe}]]</td>
+                            <td><a th:href="@{'/nguoi-dung/xem-chi-tiet/' + ${email.id}}">Xem chi tiết</a></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+                <!-- Phân trang -->
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item" id="prev-page"><a class="page-link" href="#">Trang trước</a></li>
+                        <li class="page-item" id="next-page"><a class="page-link" href="#">Trang sau</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
